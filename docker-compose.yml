@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+    app:
+        container_name: dteservice_app
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: builder
+        command: 'npm run start:dev'
+        ports:
+            - 3000:3000
+        volumes:
+            - .:/usr/app
+        environment:
+            - PORT=3000
+            - NODE_ENV=DEV
+            - POSTGRES_HOST=postgres_db
+            - POSTGRES_PORT=5432
+            - POSTGRES_USER=dteservice
+            - POSTGRES_PASSWORD=dteservice
+            - POSTGRES_DB=dteservice
+        links:
+            - postgres_db
+        depends_on:
+            - postgres_db
+    postgres_db:
+        container_name: dteservice_postgres_db
+        image: postgres:13-alpine
+        ports:
+            - 5432:5432
+        environment:
+            - POSTGRES_USER=dteservice
+            - POSTGRES_PASSWORD=dteservice
+            - POSTGRES_DB=dteservice
+        volumes:
+            - pgdata:/data/postgres
+
+volumes:
+    pgdata:
+        driver: local

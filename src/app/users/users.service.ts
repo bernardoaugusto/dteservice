@@ -1,10 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { UsersEntity } from './users.entity';
 import { FindOneOptions, Repository, UpdateResult } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly usersRepository: Repository<UsersEntity>) {}
+  constructor(
+    @InjectRepository(UsersEntity)
+    private readonly usersRepository: Repository<UsersEntity>,
+  ) {}
 
   public async store(data: Partial<UsersEntity>): Promise<UsersEntity> {
     const user = this.usersRepository.create(data);

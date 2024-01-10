@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import { hashSync } from 'bcrypt';
 
-@Entity({ name: 'users' })
+@Entity({ name: 'users-2' })
 export class UsersEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;

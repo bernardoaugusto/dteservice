@@ -2,6 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { UsersEntity } from './users.entity';
 import { FindOneOptions, Repository, UpdateResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { RegistrationNumberTypeEnum, UserRoleEnum } from './users.interface';
+import { CpfValidator } from 'src/utils/customValidations/cpf.validation';
 
 @Injectable()
 export class UsersService {
@@ -10,8 +12,21 @@ export class UsersService {
     private readonly usersRepository: Repository<UsersEntity>,
   ) {}
 
-  public async store(data: Partial<UsersEntity>): Promise<UsersEntity> {
-    const user = this.usersRepository.create(data);
+  public async store(
+    data: Partial<UsersEntity>,
+    roles = [UserRoleEnum.USER],
+  ): Promise<UsersEntity> {
+    const buildUser: Partial<UsersEntity> = {
+      ...data,
+      roles,
+      registrationNumber: data.registrationNumber.replace(/[^\d]/g, ''),
+      registrationNumberType: RegistrationNumberTypeEnum.CNPJ,
+    };
+
+    if (new CpfValidator().validate(data.registrationNumber))
+      buildUser.registrationNumberType = RegistrationNumberTypeEnum.CPF;
+
+    const user = this.usersRepository.create(buildUser);
 
     return await this.usersRepository.save(user);
   }

@@ -3,7 +3,7 @@ import { UsersService } from '../users/users.service';
 import { UsersEntity } from '../users/users.entity';
 import { compareSync } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { TokenJwtPayloadInterface } from './auth.interface';
+import { TokenJwtUserInterface } from './auth.interface';
 
 @Injectable()
 export class AuthService {
@@ -28,14 +28,18 @@ export class AuthService {
     return user;
   }
 
-  public async login(user: UsersEntity): Promise<{ token: string }> {
-    const payload: TokenJwtPayloadInterface = {
-      userId: user.id,
-      userEmail: user.email,
+  public async login(
+    user: UsersEntity,
+  ): Promise<{ token: string; user: TokenJwtUserInterface }> {
+    const payload = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
     };
 
     return {
       token: this.jwtService.sign(payload),
+      user: payload,
     };
   }
 }

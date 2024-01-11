@@ -15,6 +15,9 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { Roles } from '../auth/role/roles.decorator';
+import { RolesGuard } from '../auth/role/roles.guard';
+import { UserRoleEnum } from '../auth/auth.interface';
 
 @Controller('api/v1/users')
 export class UsersController {
@@ -35,14 +38,16 @@ export class UsersController {
 
   @Get()
   @UseGuards(AuthGuard('jwt'))
+  @Roles([UserRoleEnum.EMPLOYEE])
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
   @HttpCode(HttpStatus.OK)
   public async index() {
     return await this.usersService.findAll();
   }
 
   @Put(':id')
-  @UseGuards(AuthGuard('jwt'))
   @HttpCode(HttpStatus.OK)
+  @UseGuards(AuthGuard('jwt'))
   public async update(
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() body: UpdateUserDto,
@@ -51,8 +56,8 @@ export class UsersController {
   }
 
   @Delete(':id')
-  @UseGuards(AuthGuard('jwt'))
   @HttpCode(HttpStatus.NO_CONTENT)
+  @UseGuards(AuthGuard('jwt'))
   public async destroy(@Param('id', new ParseUUIDPipe()) id: string) {
     await this.usersService.destroy(id);
   }

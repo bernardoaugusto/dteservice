@@ -3,7 +3,7 @@ import { UsersEntity } from './users.entity';
 import { FindOneOptions, Repository, UpdateResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RegistrationNumberTypeEnum } from './users.interface';
-import { CpfValidator } from 'src/utils/customValidations/cpf.validation';
+import { CpfValidator } from '../../utils/customValidations/cpf.validation';
 import { UserRoleEnum } from '../auth/auth.interface';
 
 @Injectable()

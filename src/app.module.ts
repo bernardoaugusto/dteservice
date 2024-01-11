@@ -8,10 +8,9 @@ import { APP_PIPE } from '@nestjs/core';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       ...configService.getTypeOrmConfig(),
-      autoLoadEntities: true,
     }),
     UsersModule,
   ],
@@ -23,6 +22,4 @@ import { APP_PIPE } from '@nestjs/core';
     },
   ],
 })
-export class AppModule {
-  constructor(private dataSource: DataSource) {}
-}
+export class AppModule {}

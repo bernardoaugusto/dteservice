@@ -25,8 +25,16 @@ export class UsersController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  public async store(@Body() body: CreateUserDto) {
+  public async createUser(@Body() body: CreateUserDto) {
     return await this.usersService.store(body);
+  }
+
+  @Post('employee')
+  @HttpCode(HttpStatus.CREATED)
+  @Roles([UserRoleEnum.EMPLOYEE])
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  public async createEmployee(@Body() body: CreateUserDto) {
+    return await this.usersService.store(body, [UserRoleEnum.EMPLOYEE]);
   }
 
   @Get(':id')

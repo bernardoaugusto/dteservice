@@ -7,13 +7,16 @@ export class CreateUserDto {
   @IsNotEmpty()
   name: string;
 
+  @Validate(CpfOrCnpjValidator)
+  @IsNotEmpty()
+  registrationNumber: string;
+
   @IsNotEmpty()
   @IsEmail()
   email: string;
 
-  @Validate(CpfOrCnpjValidator)
   @IsNotEmpty()
-  registrationNumber: string;
+  phoneNumber: string;
 
   @IsNotEmpty()
   @Matches(RegExHelper.password, {

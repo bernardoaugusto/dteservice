@@ -32,8 +32,8 @@ export class UsersEntity {
   @Column()
   password: string;
 
-  @Column('text', { array: true })
-  role: string[];
+  @Column({ array: true, type: 'text' })
+  roles: string[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: string;

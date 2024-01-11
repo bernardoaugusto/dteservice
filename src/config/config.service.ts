@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 import { ExtractJwt, StrategyOptions } from 'passport-jwt';
 import { join } from 'path';
 import { DataSourceOptions } from 'typeorm';
+import { SeederOptions } from 'typeorm-extension';
 
 dotenv.config();
 
@@ -32,7 +33,7 @@ class ConfigService {
     return mode != 'DEV';
   }
 
-  public getTypeOrmConfig(): DataSourceOptions {
+  public getTypeOrmConfig(): DataSourceOptions & SeederOptions {
     return {
       type: 'postgres',
 
@@ -46,6 +47,9 @@ class ConfigService {
       synchronize: false,
       migrationsTableName: 'migrations',
       ssl: this.isProduction(),
+
+      seeds: [join(__dirname, '..', 'database/seeds/*seeder{.ts,.js}')],
+      factories: [join(__dirname, '..', 'database/factories//*{.ts,.js}')],
     };
   }
 

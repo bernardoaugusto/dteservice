@@ -22,7 +22,8 @@
     "m:show": "npm run typeorm migration:show -- -d ./src/config/ormconfig.ts",
     "m:run": "npm run typeorm migration:run -- -d ./src/config/ormconfig.ts",
     "m:generate": "npm run typeorm migration:generate --  -d ./src/config/ormconfig.ts  ./src/database/migrations/$MIGRATION_NAME && npm run lint",
-    "m:revert": "npm run typeorm migration:revert -- -d ./src/config/ormconfig.ts"
+    "m:revert": "npm run typeorm migration:revert -- -d ./src/config/ormconfig.ts",
+    "seed:run": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs seed:run -d ./src/config/ormconfig.ts"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
@@ -42,7 +43,8 @@
     "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
-    "typeorm": "^0.3.19"
+    "typeorm": "^0.3.19",
+    "typeorm-extension": "^3.3.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",

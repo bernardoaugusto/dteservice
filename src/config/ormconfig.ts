@@ -5,4 +5,5 @@ const AppDataSource = new DataSource({
   ...configService.getTypeOrmConfig(),
   migrations: ['src/database/migrations/*.ts'],
 });
+
 export default AppDataSource;

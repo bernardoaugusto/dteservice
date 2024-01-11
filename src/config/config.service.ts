@@ -1,5 +1,6 @@
 import { JwtModuleOptions } from '@nestjs/jwt';
 import * as dotenv from 'dotenv';
+import { ExtractJwt, StrategyOptions } from 'passport-jwt';
 import { join } from 'path';
 import { DataSourceOptions } from 'typeorm';
 
@@ -51,7 +52,15 @@ class ConfigService {
   public getJwtConfig(): JwtModuleOptions {
     return {
       privateKey: this.getValue('JWT_PRIVATE_KEY'),
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '1d' },
+    };
+  }
+
+  public getJwtStrategyConfig(): StrategyOptions {
+    return {
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      ignoreExpiration: false,
+      secretOrKey: this.getValue('JWT_PRIVATE_KEY'),
     };
   }
 }

@@ -40,12 +40,12 @@ export class UsersService {
     const user = await this.findOneOrFail({ id });
     this.usersRepository.merge(user, data);
 
-    return await this.usersRepository.save(data);
+    return await this.usersRepository.save(user);
   }
 
   public async destroy(id: string): Promise<UpdateResult> {
     const user = await this.findOneOrFail({ id });
 
-    return await this.usersRepository.softDelete(user);
+    return await this.usersRepository.softDelete(user.id);
   }
 }

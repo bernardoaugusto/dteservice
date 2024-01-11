@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv';
+import { join } from 'path';
 import { DataSourceOptions } from 'typeorm';
 
 dotenv.config();
@@ -39,7 +40,7 @@ class ConfigService {
       password: this.getValue('POSTGRES_PASSWORD'),
       database: this.getValue('POSTGRES_DATABASE'),
 
-      entities: ['**/*.entity{.ts,.js}'],
+      entities: [join(__dirname, '..', 'modules/**/*.entity{.ts,.js}')],
       synchronize: false,
       migrationsTableName: 'migrations',
       migrations: ['src/database/migrations/*.ts'],

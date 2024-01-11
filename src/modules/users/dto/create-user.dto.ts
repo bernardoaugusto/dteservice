@@ -1,6 +1,7 @@
-import { IsEmail, IsNotEmpty, Matches } from 'class-validator';
-import { MessagesHelper } from 'src/helpers/messages.helper';
-import { RegExHelper } from 'src/helpers/regex.helper';
+import { IsEmail, IsNotEmpty, Matches, Validate } from 'class-validator';
+import { CNPJValidator } from 'src/utils/customValidations/cnpj.validation';
+import { MessagesHelper } from 'src/utils/helpers/messages.helper';
+import { RegExHelper } from 'src/utils/helpers/regex.helper';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -9,6 +10,10 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsEmail()
   email: string;
+
+  @Validate(CNPJValidator)
+  @IsNotEmpty()
+  registrationNumber: string;
 
   @IsNotEmpty()
   @Matches(RegExHelper.password, {

@@ -17,7 +17,13 @@ export class UsersService {
   }
 
   public async findOneOrFail(
-    params: Partial<UsersEntity>,
+    params: {
+      id?: string;
+      email?: string;
+      name?: string;
+      registrationNumber?: string;
+      phoneNumber?: string;
+    },
     findOptions: FindOneOptions<UsersEntity> = {},
   ): Promise<UsersEntity> {
     const options = { ...findOptions, where: params };

@@ -17,11 +17,23 @@ export class UsersEntity {
   @Column({ name: 'name' })
   name: string;
 
+  @Column({ name: 'registration_number' })
+  registrationNumber: string;
+
+  @Column({ name: 'registration_number_type' })
+  registrationNumberType: string;
+
   @Column()
   email: string;
 
+  @Column({ name: 'phone_number' })
+  phoneNumber: string;
+
   @Column()
   password: string;
+
+  @Column('text', { array: true })
+  role: string[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: string;

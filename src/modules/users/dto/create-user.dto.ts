@@ -5,10 +5,9 @@ import {
   Matches,
   Validate,
 } from 'class-validator';
-import { CpfOrCnpjValidator } from 'src/utils/customValidations/cpfOrCnpj.validation copy';
+import { CpfOrCnpjValidator } from 'src/utils/customValidations/cpfOrCnpj.validation';
 import { MessagesHelper } from 'src/utils/helpers/messages.helper';
 import { RegExHelper } from 'src/utils/helpers/regex.helper';
-
 export class CreateUserDto {
   @IsNotEmpty()
   @IsString()

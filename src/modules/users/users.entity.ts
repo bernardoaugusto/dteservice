@@ -16,13 +16,17 @@ export class UsersEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'name' })
+  @Column()
   name: string;
 
   @Column({ name: 'registration_number' })
   registrationNumber: string;
 
-  @Column({ name: 'registration_number_type' })
+  @Column({
+    name: 'registration_number_type',
+    type: 'enum',
+    enum: RegistrationNumberTypeEnum,
+  })
   registrationNumberType: RegistrationNumberTypeEnum;
 
   @Column()
@@ -34,7 +38,11 @@ export class UsersEntity {
   @Column()
   password: string;
 
-  @Column({ array: true, type: 'text' })
+  @Column({
+    array: true,
+    type: 'enum',
+    enum: UserRoleEnum,
+  })
   roles: UserRoleEnum[];
 
   @CreateDateColumn({ name: 'created_at' })

@@ -1,3 +1,4 @@
+import { JwtModuleOptions } from '@nestjs/jwt';
 import * as dotenv from 'dotenv';
 import { join } from 'path';
 import { DataSourceOptions } from 'typeorm';
@@ -46,6 +47,13 @@ class ConfigService {
       ssl: this.isProduction(),
     };
   }
+
+  public getJwtConfig(): JwtModuleOptions {
+    return {
+      privateKey: this.getValue('JWT_PRIVATE_KEY'),
+      signOptions: { expiresIn: '60s' },
+    };
+  }
 }
 
 const configService = new ConfigService(process.env).ensureValues([
@@ -54,6 +62,7 @@ const configService = new ConfigService(process.env).ensureValues([
   'POSTGRES_USER',
   'POSTGRES_PASSWORD',
   'POSTGRES_DATABASE',
+  'JWT_PRIVATE_KEY',
 ]);
 
 export { configService };

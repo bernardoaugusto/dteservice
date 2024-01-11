@@ -20,6 +20,7 @@ services:
             - POSTGRES_USER=dteservice
             - POSTGRES_PASSWORD=dteservice
             - POSTGRES_DB=dteservice
+            - JWT_PRIVATE_KEY=dRm7KQSPvFVj4mx/xopOvo7zpZIwqYEx8l/CFNoBFn0=
         links:
             - postgres_db
         depends_on:

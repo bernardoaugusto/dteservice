@@ -15,7 +15,8 @@ export default class UserSeeder implements Seeder {
         id: '947e30d9-6f3f-47e9-ac0a-53041763a528',
         name: 'root',
         email: 'root@mail.com',
-        password: '123456',
+        password:
+          '$2b$10$9BmlNBvAhOtz76HCaHtU9O7EmZiHGMe6ZIOmZ4Nswkv78cRKWCtxq',
         roles: [UserRoleEnum.ADMIN],
         registrationNumber: '00000000000',
         registrationNumberType: RegistrationNumberTypeEnum.CPF,
@@ -24,6 +25,7 @@ export default class UserSeeder implements Seeder {
     ];
 
     const repository = dataSource.getRepository(UsersEntity);
+
     await repository.save(users);
   }
 }

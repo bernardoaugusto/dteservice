@@ -10,14 +10,17 @@ export class RolesGuard implements CanActivate {
   public canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    const roles = this.reflector.get<string[]>('roles', context.getHandler());
+    const roles = this.reflector.get<UserRoleEnum[]>(
+      'roles',
+      context.getHandler(),
+    );
 
     if (!roles) {
       return true;
     }
 
     const request = context.switchToHttp().getRequest();
-    const userRoles = request.user.roles as UserRoleEnum[];
+    const userRoles = request.user.roles;
 
     if (userRoles.includes(UserRoleEnum.ADMIN)) {
       return true;
@@ -26,7 +29,10 @@ export class RolesGuard implements CanActivate {
     return this.hasCommonElement(roles, userRoles);
   }
 
-  private hasCommonElement(array1: string[], array2: string[]): boolean {
+  private hasCommonElement(
+    array1: UserRoleEnum[],
+    array2: UserRoleEnum[],
+  ): boolean {
     return array1.some((item) => array2.includes(item));
   }
 }

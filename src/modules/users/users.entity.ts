@@ -8,6 +8,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { hashSync } from 'bcrypt';
+import { UserRoleEnum } from '../auth/auth.interface';
+import { RegistrationNumberTypeEnum } from './users.interface';
 
 @Entity({ name: 'users' })
 export class UsersEntity {
@@ -21,7 +23,7 @@ export class UsersEntity {
   registrationNumber: string;
 
   @Column({ name: 'registration_number_type' })
-  registrationNumberType: string;
+  registrationNumberType: RegistrationNumberTypeEnum;
 
   @Column()
   email: string;
@@ -33,7 +35,7 @@ export class UsersEntity {
   password: string;
 
   @Column({ array: true, type: 'text' })
-  roles: string[];
+  roles: UserRoleEnum[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: string;

@@ -2,8 +2,9 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { UsersEntity } from './users.entity';
 import { FindOneOptions, Repository, UpdateResult } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { RegistrationNumberTypeEnum, UserRoleEnum } from './users.interface';
+import { RegistrationNumberTypeEnum } from './users.interface';
 import { CpfValidator } from 'src/utils/customValidations/cpf.validation';
+import { UserRoleEnum } from '../auth/auth.interface';
 
 @Injectable()
 export class UsersService {

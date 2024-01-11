@@ -7,10 +7,10 @@ import {
 import { MessagesHelper } from '../helpers/messages.helper';
 import { RegExHelper } from '../helpers/regex.helper';
 
-@ValidatorConstraint({ name: 'CNPJValidator', async: false })
+@ValidatorConstraint({ name: 'CnpjValidator', async: false })
 @Injectable()
-export class CNPJValidator implements ValidatorConstraintInterface {
-  public async validate(value: string) {
+export class CnpjValidator implements ValidatorConstraintInterface {
+  public validate(value: string) {
     if (!value) return false;
 
     const isString = typeof value === 'string';

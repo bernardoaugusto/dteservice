@@ -7,10 +7,10 @@ import {
 import { MessagesHelper } from '../helpers/messages.helper';
 import { RegExHelper } from '../helpers/regex.helper';
 
-@ValidatorConstraint({ name: 'CPFValidator', async: false })
+@ValidatorConstraint({ name: 'CpfValidator', async: false })
 @Injectable()
-export class CPFValidator implements ValidatorConstraintInterface {
-  public async validate(value: string) {
+export class CpfValidator implements ValidatorConstraintInterface {
+  public validate(value: string) {
     var sum = 0;
     var rest = 0;
 

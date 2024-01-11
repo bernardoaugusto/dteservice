@@ -5,4 +5,5 @@ export const MessagesHelper = {
   REGISTRATION_NUMBER_INVALID: 'The registration number is invalid',
   CNPJ_INVALID: 'The CNPJ is invalid',
   CPF_INVALID: 'The CPF is invalid',
+  CPF_OR_CNPJ_INVALID: 'The CPF or CNPJ is invalid',
 };

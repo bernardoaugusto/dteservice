@@ -1,5 +1,4 @@
 import {
-  BeforeInsert,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
@@ -7,7 +6,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { hashSync } from 'bcrypt';
 import { UserRoleEnum } from '../auth/auth.interface';
 import { RegistrationNumberTypeEnum } from './users.interface';
 
@@ -53,9 +51,4 @@ export class UsersEntity {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: string;
-
-  @BeforeInsert()
-  private hashPassword(): void {
-    this.password = hashSync(this.password, 10);
-  }
 }

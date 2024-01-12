@@ -5,12 +5,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { RegistrationNumberTypeEnum } from './users.interface';
 import { CpfValidator } from '../../utils/custom-validations/cpf.validation';
 import { UserRoleEnum } from '../auth/auth.interface';
+import { BcryptAdapter } from '../../adapters/bcrypt-adapter/bcrypt-adapter';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(UsersEntity)
     private readonly usersRepository: Repository<UsersEntity>,
+    private readonly hasher: BcryptAdapter,
   ) {}
 
   public async store(
@@ -19,6 +21,7 @@ export class UsersService {
   ): Promise<UsersEntity> {
     const buildUser: Partial<UsersEntity> = {
       ...data,
+      password: await this.hasher.hash(data.password),
       roles,
       registrationNumber: data.registrationNumber.replace(/[^\d]/g, ''),
       registrationNumberType: RegistrationNumberTypeEnum.CNPJ,

@@ -16,7 +16,7 @@ export default class UserSeeder implements Seeder {
         name: 'root',
         email: 'root@mail.com',
         password:
-          '$2b$10$9BmlNBvAhOtz76HCaHtU9O7EmZiHGMe6ZIOmZ4Nswkv78cRKWCtxq',
+          '$2b$12$Twmfgh4IPXEfJx8omvKDMO/gcZyTd1Pm.by8g6OS15g2C4pZ2Sqoy',
         roles: [UserRoleEnum.ADMIN],
         registrationNumber: '00000000000',
         registrationNumberType: RegistrationNumberTypeEnum.CPF,

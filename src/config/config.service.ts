@@ -68,9 +68,9 @@ class ConfigService {
     };
   }
 
-  public getBcryptConfig(): { saltOrRounds: string } {
+  public getBcryptConfig(): { saltOrRounds: number } {
     return {
-      saltOrRounds: this.getValue('BCRYPT_SALT_OR_ROUNDS'),
+      saltOrRounds: Number(this.getValue('BCRYPT_SALT_OR_ROUNDS')),
     };
   }
 }

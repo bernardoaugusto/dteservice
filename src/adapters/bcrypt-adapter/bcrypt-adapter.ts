@@ -6,7 +6,7 @@ import { configService } from '../../config/config.service';
 
 @Injectable()
 export class BcryptAdapter implements Hasher, HashComparer {
-  private readonly saltOrRounds: string;
+  private readonly saltOrRounds: number;
 
   constructor() {
     this.saltOrRounds = configService.getBcryptConfig().saltOrRounds;

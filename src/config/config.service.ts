@@ -67,6 +67,12 @@ class ConfigService {
       secretOrKey: this.getValue('JWT_PRIVATE_KEY'),
     };
   }
+
+  public getBcryptConfig(): { saltOrRounds: string } {
+    return {
+      saltOrRounds: this.getValue('BCRYPT_SALT_OR_ROUNDS'),
+    };
+  }
 }
 
 const configService = new ConfigService(process.env).ensureValues([
@@ -76,6 +82,7 @@ const configService = new ConfigService(process.env).ensureValues([
   'POSTGRES_PASSWORD',
   'POSTGRES_DATABASE',
   'JWT_PRIVATE_KEY',
+  'BCRYPT_SALT_OR_ROUNDS',
 ]);
 
 export { configService };

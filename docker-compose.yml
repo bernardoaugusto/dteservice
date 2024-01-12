@@ -7,11 +7,12 @@ services:
             context: .
             dockerfile: Dockerfile
             target: builder
-        command: 'npm run start:dev'
+        command: sh -c "npm run m:run && npm run seed:run && npm run start:dev"
         ports:
             - 3000:3000
         volumes:
             - .:/usr/app
+            - /usr/app/node_modules
         environment:
             - PORT=3000
             - NODE_ENV=DEV

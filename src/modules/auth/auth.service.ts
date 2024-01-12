@@ -12,11 +12,11 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  public async validateUser(email: string, password: string) {
+  public async validateUser(registrationNumber: string, password: string) {
     let user: UsersEntity;
 
     try {
-      user = await this.userService.findOneOrFail({ email });
+      user = await this.userService.findOneOrFail({ registrationNumber });
     } catch (error) {
       return null;
     }

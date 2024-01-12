@@ -8,13 +8,16 @@ import { MessagesHelper } from 'src/utils/helpers/messages.helper';
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly authService: AuthService) {
     super({
-      usernameField: 'email',
+      usernameField: 'registrationNumber',
       passwordField: 'password',
     });
-    this.authService = authService;
   }
-  public async validate(email: string, password: string) {
-    const user = await this.authService.validateUser(email, password);
+
+  public async validate(registrationNumber: string, password: string) {
+    const user = await this.authService.validateUser(
+      registrationNumber,
+      password,
+    );
 
     if (!user)
       throw new UnauthorizedException(MessagesHelper.PASSWORD_OR_EMAIL_INVALID);
